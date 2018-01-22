@@ -28,5 +28,21 @@ public class Main {
             }
         }
         System.out.println("Number of students with perfect attendance: " + countAttendance);
+
+        //Calculate average of absences
+        double avg = average(absentList);
+        System.out.println("The average number of absences is " + avg);
+    }
+
+    private static double average(ArrayList<Integer> absentList) {
+        return (double)sum(absentList)/absentList.size();
+    }
+
+    private static int sum(ArrayList<Integer> absentList) {
+        int sum = 0;
+        for (int i = 0; i < absentList.size(); i++) {
+            sum += absentList.get(i);
+        }
+        return sum;
     }
 }
