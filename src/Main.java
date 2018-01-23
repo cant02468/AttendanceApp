@@ -32,6 +32,20 @@ public class Main {
         //Calculate average of absences
         double avg = average(absentList);
         System.out.println("The average number of absences is " + avg);
+
+        //Percentage of students who had fewer than 3 absences who also had perfect attendance
+        double percentAttendance = perfectOverThree(absentList , countAttendance);
+        System.out.println("The percentage of students who had fewer than 3 absences who also had perfect attendance is " + percentAttendance + "%.");
+    }
+
+    private static double perfectOverThree(ArrayList<Integer> absentList, int countAttendance) {
+        int fewerThanThree = 0;
+        for (int i = 0; i < absentList.size(); i++) {
+            if (absentList.get(i) <3) {
+                fewerThanThree++;
+            }
+        }
+        return (double)countAttendance/fewerThanThree * 100;
     }
 
     private static double average(ArrayList<Integer> absentList) {
