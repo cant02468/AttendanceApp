@@ -48,6 +48,30 @@ public class Main {
             System.out.println("The index(es) of the students who had " + numAbsences + " absences are " + indexes);
         }
 
+        //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week.
+        System.out.println("How many times does the course meet per week? ");
+        Scanner sc3 = new Scanner(System.in);
+        Integer meetings = sc3.nextInt();
+        ArrayList<Integer> indexFE = FEFinder(absentList, meetings);
+        if (indexFE.isEmpty()) {
+            System.out.println("No students have FE'd");
+        } else {
+            System.out.println("The index(es) of the student(s) who were absent more than twice the number of times the course meets per week is " + indexFE);
+            System.out.printf("%.1f%% have FE'd the course", (double)indexFE.size()/absentList.size() * 100);
+        }
+
+
+    }
+
+    private static ArrayList<Integer> FEFinder(ArrayList<Integer> absentList, Integer meetings) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        for (int i = 0; i < absentList.size(); i++) {
+            if (absentList.get(i) > meetings * 2){
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 
     private static ArrayList<Integer> absencesFinder(ArrayList<Integer> absentList, Integer numAbsences) {
