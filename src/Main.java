@@ -36,6 +36,29 @@ public class Main {
         //Percentage of students who had fewer than 3 absences who also had perfect attendance
         double percentAttendance = perfectOverThree(absentList , countAttendance);
         System.out.println("The percentage of students who had fewer than 3 absences who also had perfect attendance is " + percentAttendance + "%.");
+
+        //Identify the indexes of students with a specific number of absences
+        System.out.println("What is the specified number of absences? ");
+        Scanner sc2 = new Scanner(System.in);
+        Integer numAbsences = sc.nextInt();
+        ArrayList<Integer> indexes = absencesFinder(absentList, numAbsences);
+        if (indexes.isEmpty()) {
+            System.out.println("No students have " + numAbsences + " absences." );
+        } else {
+            System.out.println("The index(es) of the students who had " + numAbsences + " absences are " + indexes);
+        }
+
+    }
+
+    private static ArrayList<Integer> absencesFinder(ArrayList<Integer> absentList, Integer numAbsences) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        for (int i = 0; i < absentList.size(); i++) {
+            if (absentList.get(i) == numAbsences){
+                indexes.add(i);
+            }
+        }
+        return indexes;
     }
 
     private static double perfectOverThree(ArrayList<Integer> absentList, int countAttendance) {
