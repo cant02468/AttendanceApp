@@ -48,7 +48,7 @@ public class Main {
             System.out.println("The index(es) of the students who had " + numAbsences + " absences are " + indexes);
         }
 
-        //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week.
+        //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week
         System.out.println("How many times does the course meet per week? ");
         Scanner sc3 = new Scanner(System.in);
         Integer meetings = sc3.nextInt();
