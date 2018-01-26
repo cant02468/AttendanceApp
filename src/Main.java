@@ -30,7 +30,7 @@ public class Main {
         System.out.println("Number of students with perfect attendance: " + countAttendance);
 
         //Calculate average of absences
-        double avg = average(absentList);
+        double avg = average(absentList, absentList);
         System.out.println("The average number of absences is " + avg);
 
         //Percentage of students who had fewer than 3 absences who also had perfect attendance
@@ -38,7 +38,7 @@ public class Main {
         System.out.println("The percentage of students who had fewer than 3 absences who also had perfect attendance is " + percentAttendance + "%.");
 
         //Identify the indexes of students with a specific number of absences
-        System.out.println("What is the specified number of absences? ");
+        System.out.println("\nWhat is the specified number of absences? ");
         Scanner sc2 = new Scanner(System.in);
         Integer numAbsences = sc.nextInt();
         ArrayList<Integer> indexes = absencesFinder(absentList, numAbsences);
@@ -49,16 +49,19 @@ public class Main {
         }
 
         //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week
-        System.out.println("How many times does the course meet per week? ");
+        System.out.println("\nHow many times does the course meet per week? ");
         Scanner sc3 = new Scanner(System.in);
         Integer meetings = sc3.nextInt();
         ArrayList<Integer> indexFE = FEFinder(absentList, meetings);
+        double FEPercentage = (double)indexFE.size()/absentList.size() * 100;
         if (indexFE.isEmpty()) {
             System.out.println("No students have FE'd");
         } else {
             System.out.println("The index(es) of the student(s) who were absent more than twice the number of times the course meets per week is " + indexFE);
-            System.out.printf("%.1f%% have FE'd the course", (double)indexFE.size()/absentList.size() * 100);
+            System.out.printf("%.1f%% have FE'd the course", FEPercentage);
         }
+
+        //Find the average of only the non-FE'd absences
 
 
     }
@@ -95,14 +98,14 @@ public class Main {
         return (double)countAttendance/fewerThanThree * 100;
     }
 
-    private static double average(ArrayList<Integer> absentList) {
-        return (double)sum(absentList)/absentList.size();
+    private static double average(ArrayList<Integer> part, ArrayList<Integer> whole) {
+        return (double)sum(part)/whole.size();
     }
 
-    private static int sum(ArrayList<Integer> absentList) {
+    private static int sum(ArrayList<Integer> part) {
         int sum = 0;
-        for (int i = 0; i < absentList.size(); i++) {
-            sum += absentList.get(i);
+        for (int i = 0; i < part.size(); i++) {
+            sum += part.get(i);
         }
         return sum;
     }
