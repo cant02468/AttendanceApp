@@ -62,8 +62,22 @@ public class Main {
         }
 
         //Find the average of only the non-FE'd absences
+        ArrayList<Integer> elemNonFE = nonFE(absentList, meetings);
+        double avgNonFE = average(elemNonFE, absentList);
+        System.out.println("\nThe average of the non-FE'd absences is " + avgNonFE);
 
 
+    }
+
+    private static ArrayList<Integer> nonFE(ArrayList<Integer> absentList, Integer meetings) {
+        ArrayList<Integer> elements = new ArrayList<>();
+
+        for (int i = 0; i < absentList.size(); i++) {
+            if (absentList.get(i) <= meetings * 2) {
+                elements.add(absentList.get(i));
+            }
+        }
+        return elements;
     }
 
     private static ArrayList<Integer> FEFinder(ArrayList<Integer> absentList, Integer meetings) {
