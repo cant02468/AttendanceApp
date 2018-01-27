@@ -21,20 +21,15 @@ public class Main {
         System.out.println("The elements are: " + absentList);
 
         //Number of students with perfect attendance
-        int countAttendance = 0;
-        for (int i = 0; i < name.length(); i++) {
-            if (absentList.get(i) == 0){
-                countAttendance++;
-            }
-        }
+        int countAttendance = countNum(absentList, 0);
         System.out.println("Number of students with perfect attendance: " + countAttendance);
 
         //Calculate average of absences
-        double avg = average(absentList, absentList);
+        double avg = average(absentList);
         System.out.println("The average number of absences is " + avg);
 
         //Percentage of students who had fewer than 3 absences who also had perfect attendance
-        double percentAttendance = perfectOverThree(absentList , countAttendance);
+        double percentAttendance = perfectOver(absentList , 3);
         System.out.println("The percentage of students who had fewer than 3 absences who also had perfect attendance is " + percentAttendance + "%.");
 
         //Identify the indexes of students with a specific number of absences
@@ -53,7 +48,7 @@ public class Main {
         Scanner sc3 = new Scanner(System.in);
         Integer meetings = sc3.nextInt();
         ArrayList<Integer> indexFE = FEFinder(absentList, meetings);
-        double FEPercentage = (double)indexFE.size()/absentList.size() * 100;
+        double FEPercentage = percentage(indexFE.size(),absentList.size());
         if (indexFE.isEmpty()) {
             System.out.println("No students have FE'd");
         } else {
@@ -63,10 +58,28 @@ public class Main {
 
         //Find the average of only the non-FE'd absences
         ArrayList<Integer> elemNonFE = nonFE(absentList, meetings);
-        double avgNonFE = average(elemNonFE, absentList);
+        double avgNonFE = average(elemNonFE);
         System.out.println("\nThe average of the non-FE'd absences is " + avgNonFE);
 
 
+    }
+
+    private static double percentage(int numerator, int denominator) {
+        return ((double)numerator/denominator * 100);
+    }
+
+    private static int countNum(ArrayList<Integer> absentList, int num) {
+        int count = 0;
+        for (int i = 0; i < absentList.size(); i++) {
+            if (absentList.get(i) == num) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static double average(ArrayList<Integer> itself) {
+        return average(itself, itself);
     }
 
     private static ArrayList<Integer> nonFE(ArrayList<Integer> absentList, Integer meetings) {
@@ -102,14 +115,14 @@ public class Main {
         return indexes;
     }
 
-    private static double perfectOverThree(ArrayList<Integer> absentList, int countAttendance) {
+    private static double perfectOver(ArrayList<Integer> absentList, int num) {
         int fewerThanThree = 0;
         for (int i = 0; i < absentList.size(); i++) {
-            if (absentList.get(i) <3) {
+            if (absentList.get(i) < num) {
                 fewerThanThree++;
             }
         }
-        return (double)countAttendance/fewerThanThree * 100;
+        return percentage(countNum(absentList, 0),fewerThanThree);
     }
 
     private static double average(ArrayList<Integer> part, ArrayList<Integer> whole) {
