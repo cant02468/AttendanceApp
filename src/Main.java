@@ -63,7 +63,7 @@ public class Main {
         System.out.println("\nThe average of the non-FE'd absences is " + avgNonFE);
 
         //Add [X] to any absences greater than [Y].
-        System.out.println("How many absences are to be added? The value can be positive, negative, or zero.");
+        System.out.println("\nHow many absences are to be added? The value can be positive, negative, or zero.");
         Scanner sc4 = new Scanner(System.in);
         Integer addedAbsences = sc.nextInt();
         System.out.println("What is the target number of absences?");
@@ -74,9 +74,11 @@ public class Main {
 
         //Sort the absences using a library function.
         Collections.sort(absentList);
-        System.out.println("The sorted list of absences is " + absentList);
+        System.out.println("\nThe sorted list of absences is " + absentList);
 
-        
+        //Shuffle the absences using a library function.
+        Collections.shuffle(absentList);
+        System.out.println("\nThe shuffled list of absences is " + absentList);
 
     }
 
