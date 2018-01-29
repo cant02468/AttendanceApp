@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -69,7 +70,12 @@ public class Main {
         Scanner sc5 = new Scanner(System.in);
         Integer targetElem = sc.nextInt();
         absentList = AddToElem(absentList, addedAbsences, targetElem);
-        System.out.println("The new list of absences are " + absentList);
+        System.out.println("The new list of absences is " + absentList);
+
+        //Sort the absences using a library function.
+        Collections.sort(absentList);
+        System.out.println("The sorted list of absences is " + absentList);
+
         
 
     }
