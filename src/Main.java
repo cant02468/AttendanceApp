@@ -56,12 +56,42 @@ public class Main {
             System.out.printf("%.1f%% have FE'd the course", FEPercentage);
         }
 
-        //Find the average of only the non-FE'd absences
+        //Find the average of only the non-FE'd absences.
         ArrayList<Integer> elemNonFE = nonFE(absentList, meetings);
         double avgNonFE = average(elemNonFE);
         System.out.println("\nThe average of the non-FE'd absences is " + avgNonFE);
 
+        //Add [X] to any absences greater than [Y].
+        System.out.println("How many absences are to be added? The value can be positive, negative, or zero.");
+        Scanner sc4 = new Scanner(System.in);
+        Integer addedAbsences = sc.nextInt();
+        System.out.println("What is the target number of absences?");
+        Scanner sc5 = new Scanner(System.in);
+        Integer targetElem = sc.nextInt();
+        absentList = AddToElem(absentList, addedAbsences, targetElem);
+        System.out.println("The new list of absences are " + absentList);
+        
 
+    }
+
+    private static ArrayList<Integer> AddToElem(ArrayList<Integer> userList, Integer modifier, Integer target) {
+        ArrayList<Integer> returnList = new ArrayList<>();
+        for (int i = 0; i < userList.size() ; i++) {
+            if (userList.get(i) >= target) {
+                Integer newElem = userList.get(i) + modifier;
+                if (newElem > 15) {
+                    newElem = 15;
+                }
+                if (newElem < 0) {
+                    newElem = 0;
+                }
+                returnList.add(newElem);
+            } else {
+                returnList.add(userList.get(i));
+            }
+
+        }
+        return returnList;
     }
 
     private static double percentage(int numerator, int denominator) {
