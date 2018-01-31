@@ -98,8 +98,8 @@ public class Main {
         for (int i = 0; i < yElem.size(); i++) {
             String displayAsterisk = " ";
             int frequency = xCount.get(yElem.get(i));
-            for (int j = 0; j < frequency; j++) displayAsterisk += " *";
-            System.out.println(yElem.get(i) + ' ' + displayAsterisk);
+            for (int j = 0; j < frequency; j++) displayAsterisk += "*";
+            System.out.println(Integer.toString(yElem.get(i)) + ' ' + displayAsterisk);
         }
     }
 
