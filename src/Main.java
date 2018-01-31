@@ -81,6 +81,19 @@ public class Main {
         Set<Integer> uniqueAbsences = seekUnique(absentList);
         System.out.println("\nThe unique absences are " + uniqueAbsences);
 
+        //Count the number of absences for each value.
+        Map<Integer, Integer> absentCount = elemCount(absentList);
+        System.out.println(absentCount);
+
+    }
+
+    private static Map<Integer, Integer> elemCount(ArrayList<Integer> userList) {
+        Map<Integer,Integer> returnMap = new HashMap<>();
+        for (int i = 0; i < userList.size(); i++) {
+            Integer count = returnMap.get(userList.get(i));
+            returnMap.put(userList.get(i), (count == null) ? 1 : count + 1);
+        }
+        return returnMap;
     }
 
     private static Set<Integer> seekUnique(ArrayList<Integer> userList) {
