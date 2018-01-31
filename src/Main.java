@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -80,6 +77,26 @@ public class Main {
         Collections.shuffle(absentList);
         System.out.println("\nThe shuffled list of absences is " + absentList);
 
+        //Seek for the number of absences that are unique.
+        Set<Integer> uniqueAbsences = seekUnique(absentList);
+        System.out.println("\nThe unique absences are " + uniqueAbsences);
+
+    }
+
+    private static Set<Integer> seekUnique(ArrayList<Integer> userList) {
+        ArrayList<Integer> storeDuplicates = new ArrayList<>();
+        Set<Integer> returnSet = new HashSet<>();
+        for (int i = 0; i < userList.size(); i++) {
+            if (returnSet.contains(userList.get(i))) {
+                storeDuplicates.add(userList.get(i));
+            } else {
+                returnSet.add(userList.get(i));
+            }
+        }
+        for (int i = 0; i < storeDuplicates.size(); i++) {
+            returnSet.remove(storeDuplicates.get(i));
+        }
+        return returnSet;
     }
 
     private static ArrayList<Integer> AddToElem(ArrayList<Integer> userList, Integer modifier, Integer target) {
@@ -146,7 +163,7 @@ public class Main {
         ArrayList<Integer> indexes = new ArrayList<>();
 
         for (int i = 0; i < absentList.size(); i++) {
-            if (absentList.get(i) == numAbsences){
+            if (absentList.get(i).equals(numAbsences)){
                 indexes.add(i);
             }
         }
