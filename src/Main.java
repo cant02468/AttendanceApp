@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -83,9 +84,25 @@ public class Main {
 
         //Count the number of absences for each value.
         Map<Integer, Integer> absentCount = elemCount(absentList);
-        System.out.println(absentCount);
+        System.out.println("\nThe frequency of absences are " + absentCount);
+
+        //Output frequency of absences as a histogram
+        histogramDisplay(absentList); //Outputs the absences as 32 + absences as a value, for some reason. Must debug.
 
     }
+
+    private static void histogramDisplay(ArrayList<Integer> userList) {
+        Set<Integer> set = new HashSet<>(userList);
+        ArrayList<Integer> yElem = new ArrayList<>(set);
+        Map<Integer,Integer> xCount = elemCount(userList);
+        for (int i = 0; i < yElem.size(); i++) {
+            String displayAsterisk = " ";
+            int frequency = xCount.get(yElem.get(i));
+            for (int j = 0; j < frequency; j++) displayAsterisk += " *";
+            System.out.println(yElem.get(i) + ' ' + displayAsterisk);
+        }
+    }
+
 
     private static Map<Integer, Integer> elemCount(ArrayList<Integer> userList) {
         Map<Integer,Integer> returnMap = new HashMap<>();
