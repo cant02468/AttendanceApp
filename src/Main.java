@@ -87,8 +87,26 @@ public class Main {
         System.out.println("\nThe frequency of absences are " + absentCount);
 
         //Output frequency of absences as a histogram
-        histogramDisplay(absentList); //Outputs the absences as 32 + absences as a value, for some reason. Must debug.
+        histogramDisplay(absentList);
 
+        //Sort the absences using a user-defined sort function.
+        absentList = bubbleSort(absentList);
+        System.out.println("The user-sorted list is: " + absentList);
+
+        
+    }
+
+    private static ArrayList<Integer> bubbleSort (ArrayList<Integer> userList) {
+        for (int i = 0; i < userList.size(); i++) {
+            for (int j = 0; j < userList.size(); j++) {
+                if (userList.get(i) < userList.get(j)) {
+                    int temp = userList.get(i);
+                    userList.set(i, userList.get(j));
+                    userList.set(j, temp);
+                }
+            }
+        }
+        return userList;
     }
 
     private static void histogramDisplay(ArrayList<Integer> userList) {
