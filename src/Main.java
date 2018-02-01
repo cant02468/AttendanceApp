@@ -90,10 +90,24 @@ public class Main {
         histogramDisplay(absentList);
 
         //Sort the absences using a user-defined sort function.
-        absentList = bubbleSort(absentList);
-        System.out.println("The user-sorted list is: " + absentList);
+        bubbleSort(absentList);
+        System.out.println("The user-sorted absences are " + absentList);
 
-        
+        //Shuffle the absences using a user-defined shuffle function.
+        shuffle(absentList);
+        System.out.println("The user-shuffled absences are " + absentList);
+
+    }
+
+    private static ArrayList<Integer> shuffle(ArrayList<Integer> userList) {
+        Random rand = new Random();
+        for (int i = 0; i < userList.size(); i++) {
+            int newID = rand.nextInt(userList.size());
+            int temp = userList.get(i);
+            userList.set(i, userList.get(newID));
+            userList.set(newID, temp);
+        }
+        return userList;
     }
 
     private static ArrayList<Integer> bubbleSort (ArrayList<Integer> userList) {
