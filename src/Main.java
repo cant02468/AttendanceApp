@@ -11,7 +11,7 @@ public class Main {
         String name = sc.next();
         System.out.println("Welcome, " + name + "!\n");
 
-        //Create and output list of absences
+        //Create and output list of absences.
         ArrayList<Integer> absentList = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < name.length(); i++) {
@@ -19,19 +19,19 @@ public class Main {
         }
         System.out.println("The elements are: " + absentList);
 
-        //Number of students with perfect attendance
+        //Number of students with perfect attendance.
         int countAttendance = countNum(absentList, 0);
         System.out.println("Number of students with perfect attendance: " + countAttendance);
 
-        //Calculate average of absences
+        //Calculate average of absences.
         double avg = average(absentList);
         System.out.println("The average number of absences is " + avg);
 
-        //Percentage of students who had fewer than 3 absences who also had perfect attendance
+        //Percentage of students who had fewer than 3 absences who also had perfect attendance.
         double percentAttendance = perfectOver(absentList , 3);
         System.out.println("The percentage of students who had fewer than 3 absences who also had perfect attendance is " + percentAttendance + "%.");
 
-        //Identify the indexes of students with a specific number of absences
+        //Identify the indexes of students with a specific number of absences.
         System.out.println("\nWhat is the specified number of absences? ");
         Scanner sc2 = new Scanner(System.in);
         Integer numAbsences = sc.nextInt();
@@ -42,7 +42,7 @@ public class Main {
             System.out.println("The index(es) of the students who had " + numAbsences + " absences are " + indexes);
         }
 
-        //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week
+        //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week.
         System.out.println("\nHow many times does the course meet per week? ");
         Scanner sc3 = new Scanner(System.in);
         Integer meetings = sc3.nextInt();
@@ -86,7 +86,7 @@ public class Main {
         Map<Integer, Integer> absentCount = elemCount(absentList);
         System.out.println("\nThe frequency of absences are " + absentCount);
 
-        //Output frequency of absences as a histogram
+        //Output frequency of absences as a histogram.
         histogramDisplay(absentList);
 
         //Sort the absences using a user-defined sort function.
