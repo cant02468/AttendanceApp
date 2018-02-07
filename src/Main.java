@@ -93,7 +93,25 @@ public class Main {
         shuffle(absentList);
         System.out.println("The user-shuffled absences are " + absentList);
 
+        //Create and output an ArrayList of 5 distinct names.
+        System.out.println("Please enter a distinct name and press 'enter' 5 times.");
+        ArrayList<String> nameList =  customArrayList(5);
+        System.out.println("The 5 distinct names are " + nameList);
+
     }
+    private static ArrayList<String> customArrayList (Integer size){
+        ArrayList<String> returnList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            String userString = stringInput();
+            while (returnList.contains(userString)) {
+                System.out.println("Input must be unique. Please enter a unique input.");
+                userString = stringInput();
+            }
+            returnList.add(userString);
+        }
+        return returnList;
+    }
+
     private static Integer intInput(){
         Scanner sc = new Scanner(System.in);
         Integer returnInteger = sc.nextInt();
@@ -147,7 +165,7 @@ public class Main {
         Map<Integer,Integer> returnMap = new HashMap<>();
         for (int i = 0; i < userList.size(); i++) {
             Integer count = returnMap.get(userList.get(i));
-            returnMap.put(userList.get(i), (count == null) ? 1 : count + 1);
+            returnMap.put(userList.get(i), (count == null) ? 1 : count++);
         }
         return returnMap;
     }
