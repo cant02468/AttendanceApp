@@ -90,15 +90,33 @@ public class Main {
         System.out.println("The user-sorted absences are " + absentList);
 
         //Shuffle the absences using a user-defined shuffle function.
-        shuffle(absentList);
+        shuffleIntegerList(absentList);
         System.out.println("The user-shuffled absences are " + absentList);
 
         //Create and output an ArrayList of 5 distinct names.
-        System.out.println("Please enter a distinct name and press 'enter' 5 times.");
+        System.out.println("\nPlease enter a distinct name and press 'enter' 5 times.");
         ArrayList<String> nameList =  customArrayList(5);
         System.out.println("The 5 distinct names are " + nameList);
 
+        //Shuffle the names using a user-defined shuffle function.
+        shuffleStringList(nameList);
+        System.out.println("\nThe user-shuffled list of names is " + nameList);
+
+        //Using the 5 names, create another list that has the same size as the absences list.
+        ArrayList<String> randomNameList = randomNames(nameList, absentList.size());
+        System.out.println("The random list of names that is the same size as the absences list is " + randomNameList);
+
     }
+
+    private static ArrayList<String> randomNames(ArrayList<String> userList, int size) {
+        ArrayList<String> returnList = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            returnList.add(userList.get(rand.nextInt(userList.size())));
+        }
+        return returnList;
+    }
+
     private static ArrayList<String> customArrayList (Integer size){
         ArrayList<String> returnList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -108,6 +126,7 @@ public class Main {
                 userString = stringInput();
             }
             returnList.add(userString);
+
         }
         return returnList;
     }
@@ -124,7 +143,18 @@ public class Main {
         return returnString;
     }
 
-    private static ArrayList<Integer> shuffle(ArrayList<Integer> userList) {
+    private static ArrayList<String> shuffleStringList (ArrayList<String> userList) {
+        Random rand = new Random();
+        for (int i = 0; i < userList.size(); i++) {
+            int newID = rand.nextInt(userList.size());
+            String temp = userList.get(i);
+            userList.set(i, userList.get(newID));
+            userList.set(newID, temp);
+        }
+        return userList;
+    }
+
+    private static ArrayList<Integer> shuffleIntegerList(ArrayList<Integer> userList) {
         Random rand = new Random();
         for (int i = 0; i < userList.size(); i++) {
             int newID = rand.nextInt(userList.size());
@@ -165,7 +195,7 @@ public class Main {
         Map<Integer,Integer> returnMap = new HashMap<>();
         for (int i = 0; i < userList.size(); i++) {
             Integer count = returnMap.get(userList.get(i));
-            returnMap.put(userList.get(i), (count == null) ? 1 : count++);
+            returnMap.put(userList.get(i), (count == null) ? 1 : count +1);
         }
         return returnMap;
     }
