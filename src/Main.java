@@ -7,8 +7,7 @@ public class Main {
         //Customize welcome message
         System.out.println("\nHello, AttendanceApp!");
         System.out.print("\nEnter your name: ");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.next();
+        String name = stringInput();
         System.out.println("Welcome, " + name + "!\n");
 
         //Create and output list of absences.
@@ -33,8 +32,7 @@ public class Main {
 
         //Identify the indexes of students with a specific number of absences.
         System.out.println("\nWhat is the specified number of absences? ");
-        Scanner sc2 = new Scanner(System.in);
-        Integer numAbsences = sc.nextInt();
+        Integer numAbsences = intInput();
         ArrayList<Integer> indexes = absencesFinder(absentList, numAbsences);
         if (indexes.isEmpty()) {
             System.out.println("No students have " + numAbsences + " absences." );
@@ -44,8 +42,7 @@ public class Main {
 
         //Identify the index(es) of the student(s) who were absent more than twice the number of times the course meets per week.
         System.out.println("\nHow many times does the course meet per week? ");
-        Scanner sc3 = new Scanner(System.in);
-        Integer meetings = sc3.nextInt();
+        Integer meetings = intInput();
         ArrayList<Integer> indexFE = FEFinder(absentList, meetings);
         double FEPercentage = percentage(indexFE.size(),absentList.size());
         if (indexFE.isEmpty()) {
@@ -62,11 +59,9 @@ public class Main {
 
         //Add [X] to any absences greater than [Y].
         System.out.println("\nHow many absences are to be added? The value can be positive, negative, or zero.");
-        Scanner sc4 = new Scanner(System.in);
-        Integer addedAbsences = sc.nextInt();
+        Integer addedAbsences = intInput();
         System.out.println("What is the target number of absences?");
-        Scanner sc5 = new Scanner(System.in);
-        Integer targetElem = sc.nextInt();
+        Integer targetElem = intInput();
         absentList = AddToElem(absentList, addedAbsences, targetElem);
         System.out.println("The new list of absences is " + absentList);
 
@@ -97,6 +92,17 @@ public class Main {
         shuffle(absentList);
         System.out.println("The user-shuffled absences are " + absentList);
 
+    }
+    private static Integer intInput(){
+        Scanner sc = new Scanner(System.in);
+        Integer returnInteger = sc.nextInt();
+        return returnInteger;
+    }
+
+    private static String stringInput (){
+        Scanner sc = new Scanner(System.in);
+        String returnString = sc.next();
+        return returnString;
     }
 
     private static ArrayList<Integer> shuffle(ArrayList<Integer> userList) {
