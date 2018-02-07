@@ -63,6 +63,7 @@ public class Main {
         System.out.println("What is the target number of absences?");
         Integer targetElem = intInput();
         absentList = AddToElem(absentList, addedAbsences, targetElem);
+        absentList = limitElems(absentList, 0,15);
         System.out.println("The new list of absences is " + absentList);
 
         //Sort the absences using a library function.
@@ -167,22 +168,30 @@ public class Main {
         return returnSet;
     }
 
+    private static ArrayList<Integer> limitElems(ArrayList<Integer> userList, Integer minimum, Integer maximum) {
+        ArrayList<Integer> returnList = new ArrayList<>();
+        for (int i = 0; i < userList.size(); i++) {
+            Integer newElem = userList.get(i);
+            if (newElem > maximum) {
+                newElem = maximum;
+            }
+            if (newElem < minimum) {
+                newElem = minimum;
+            }
+            returnList.add(newElem);
+        }
+        return returnList;
+    }
+
     private static ArrayList<Integer> AddToElem(ArrayList<Integer> userList, Integer modifier, Integer target) {
         ArrayList<Integer> returnList = new ArrayList<>();
         for (int i = 0; i < userList.size() ; i++) {
             if (userList.get(i) >= target) {
                 Integer newElem = userList.get(i) + modifier;
-                if (newElem > 15) {
-                    newElem = 15;
-                }
-                if (newElem < 0) {
-                    newElem = 0;
-                }
                 returnList.add(newElem);
             } else {
                 returnList.add(userList.get(i));
             }
-
         }
         return returnList;
     }
