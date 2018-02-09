@@ -104,8 +104,32 @@ public class Main {
 
         //Using the 5 names, create another list that has the same size as the absences list.
         ArrayList<String> randomNameList = randomNames(nameList, absentList.size());
-        System.out.println("The random list of names that is the same size as the absences list is " + randomNameList);
+        System.out.println("\nThe random list of names that is the same size as the absences list is " + randomNameList);
 
+        //Determine if all  5 names used at least once.
+        boolean nameUsageCheck = ArrayInArray(nameList, randomNameList);
+        if (nameUsageCheck) {
+            System.out.println("\nAll 5 names have been used at least once.");
+        } else {
+            System.out.println("\nSome of the names have not been used at least once.");
+        }
+
+    }
+
+    private static boolean ArrayInArray(ArrayList<String> shortUserList, ArrayList<String> largeUserList) {
+        int count = 0;
+        Set<String> shortSet = new HashSet<>(shortUserList);
+        ArrayList<String> shortList = new ArrayList<>(shortSet);
+        Set<String> longSet = new HashSet<>(largeUserList);
+        ArrayList<String> longList = new ArrayList<>(longSet);
+        for (int i = 0; i < shortUserList.size(); i++) {
+            if (longList.get(i).equals(shortList.get(i))){
+                count++;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static ArrayList<String> randomNames(ArrayList<String> userList, int size) {
