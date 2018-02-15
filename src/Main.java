@@ -88,7 +88,7 @@ public class Main {
 
         //Sort the absences using a user-defined sort function.
         bubbleSort(absentList);
-        System.out.println("The user-sorted absences are " + absentList);
+        System.out.println("\nThe user-sorted absences are " + absentList);
 
         //Shuffle the absences using a user-defined shuffle function.
         shuffleIntegerList(absentList);
@@ -110,14 +110,19 @@ public class Main {
         //Determine if all  5 names used at least once.
         boolean nameUsageCheck = ArrayInArray(nameList, newNameList);
         if (nameUsageCheck) {
-            System.out.println("\nAll 5 names have been used at least once.");
+            System.out.println("All 5 names have been used at least once.");
         } else {
-            System.out.println("\nSome of the names have not been used at least once.");
+            System.out.println("Some of the names have not been used at least once.");
         }
 
         //Output the names of the students with perfect attendance.
         ArrayList<String> absentlessStudents = findIDs(newNameList, absencesFinder(absentList, 0));
         System.out.println("\nThe name(s) of students with perfect attendance is " + absentlessStudents + ".");
+
+        //The names of the students who have FE'd some course.
+        ArrayList<String> FEStudents = findIDs(newNameList, indexFE);
+        System.out.println("\nThe name(s) of students who FE'd some course is " + FEStudents + ".");
+
     }
 
     private static ArrayList<String> findIDs(ArrayList<String> elements, ArrayList<Integer> indexes) {
