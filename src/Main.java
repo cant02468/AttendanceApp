@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -103,17 +104,28 @@ public class Main {
         System.out.println("\nThe user-shuffled list of names is " + nameList);
 
         //Using the 5 names, create another list that has the same size as the absences list.
-        ArrayList<String> randomNameList = randomNames(nameList, absentList.size());
-        System.out.println("\nThe random list of names that is the same size as the absences list is " + randomNameList);
+        ArrayList<String> newNameList = randomNames(nameList, absentList.size());
+        System.out.println("\nThe random list of names that is the same size as the absences list is " + newNameList);
 
         //Determine if all  5 names used at least once.
-        boolean nameUsageCheck = ArrayInArray(nameList, randomNameList);
+        boolean nameUsageCheck = ArrayInArray(nameList, newNameList);
         if (nameUsageCheck) {
             System.out.println("\nAll 5 names have been used at least once.");
         } else {
             System.out.println("\nSome of the names have not been used at least once.");
         }
 
+        //Output the names of the students with perfect attendance.
+        ArrayList<String> absentlessStudents = findIDs(newNameList, absencesFinder(absentList, 0));
+        System.out.println("\nThe name(s) of students with perfect attendance is " + absentlessStudents + ".");
+    }
+
+    private static ArrayList<String> findIDs(ArrayList<String> elements, ArrayList<Integer> indexes) {
+        ArrayList<String> returnArray = new ArrayList<>();
+        for (int ID : indexes) {
+            returnArray.add(elements.get(ID));
+        }
+        return returnArray;
     }
 
     private static boolean ArrayInArray(ArrayList<String> shortUserList, ArrayList<String> largeUserList) {
