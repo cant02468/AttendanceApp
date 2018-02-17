@@ -80,7 +80,7 @@ public class Main {
         System.out.println("\nThe unique absences are " + uniqueAbsences);
 
         //Count the number of absences for each value.
-        Map<Integer, Integer> absentCount = elemCount(absentList);
+        Map<Integer, Integer> absentCount = elemCountInt(absentList);
         System.out.println("\nThe frequency of absences are " + absentCount);
 
         //Output frequency of absences as a histogram.
@@ -119,11 +119,33 @@ public class Main {
         ArrayList<String> absentlessStudents = findIDs(newNameList, absencesFinder(absentList, 0));
         System.out.println("\nThe name(s) of students with perfect attendance is " + absentlessStudents + ".");
 
-        //The names of the students who have FE'd some course.
+        //Output the names of the students who have FE'd some course.
         ArrayList<String> FEStudents = findIDs(newNameList, indexFE);
         System.out.println("\nThe name(s) of students who FE'd some course is " + FEStudents + ".");
 
+        //Find the number of courses [name] has.
+        System.out.println("What is the name of the student you want to know the number of courses the student has?");
+        String searchName = stringInput();
+        Map <String, Integer> studentCourses = elemCountString(newNameList);
+        if (studentCourses.containsKey(searchName)) {
+            System.out.println("\n" + searchName + " has " + studentCourses.get(searchName) + " courses.");
+        } else {
+            System.out.println("\n" + searchName + " does not appear to be taking any courses.");
+        }
+
+        
+
     }
+
+    private static Map<String, Integer> elemCountString(ArrayList<String> userList) {
+        Map<String,Integer> returnMap = new HashMap<>();
+        for (int i = 0; i < userList.size(); i++) {
+            Integer count = returnMap.get(userList.get(i));
+            returnMap.put(userList.get(i), (count == null) ? 1 : count +1);
+        }
+        return returnMap;
+    }
+
 
     private static ArrayList<String> findIDs(ArrayList<String> elements, ArrayList<Integer> indexes) {
         ArrayList<String> returnArray = new ArrayList<>();
@@ -222,7 +244,7 @@ public class Main {
     private static void histogramDisplay(ArrayList<Integer> userList) {
         Set<Integer> set = new HashSet<>(userList);
         ArrayList<Integer> yElem = new ArrayList<>(set);
-        Map<Integer,Integer> xCount = elemCount(userList);
+        Map<Integer,Integer> xCount = elemCountInt(userList);
         for (int i = 0; i < yElem.size(); i++) {
             String displayAsterisk = " ";
             int frequency = xCount.get(yElem.get(i));
@@ -232,7 +254,7 @@ public class Main {
     }
 
 
-    private static Map<Integer, Integer> elemCount(ArrayList<Integer> userList) {
+    private static Map<Integer, Integer> elemCountInt(ArrayList<Integer> userList) {
         Map<Integer,Integer> returnMap = new HashMap<>();
         for (int i = 0; i < userList.size(); i++) {
             Integer count = returnMap.get(userList.get(i));
