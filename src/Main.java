@@ -101,11 +101,11 @@ public class Main {
 
         //Shuffle the names using a user-defined shuffle function.
         shuffleStringList(nameList);
-        System.out.println("\nThe user-shuffled list of names is " + nameList);
+        System.out.println("\nThe user-shuffled list of names is " + nameList + ",");
 
         //Using the 5 names, create another list that has the same size as the absences list.
         ArrayList<String> newNameList = randomNames(nameList, absentList.size());
-        System.out.println("\nThe random list of names that is the same size as the absences list is " + newNameList);
+        System.out.println("\nThe random list of names that is the same size as the absences list is " + newNameList + ".");
 
         //Determine if all  5 names used at least once.
         boolean nameUsageCheck = ArrayInArray(nameList, newNameList);
@@ -117,10 +117,14 @@ public class Main {
 
         //Output the names of the students with perfect attendance.
         ArrayList<String> absentlessStudents = findIDs(newNameList, absencesFinder(absentList, 0));
-        System.out.println("\nThe name(s) of students with perfect attendance is " + absentlessStudents + ".");
+        if (!absentlessStudents.isEmpty()) {
+            System.out.println("\nThe name(s) of students with perfect attendance is " + absentlessStudents + ".");
+        } else {
+            System.out.println("\nNo student has perfect attendance.");
+        }
 
         //Output the names of the students who have FE'd some course.
-        ArrayList<String> FEStudents = findIDs(newNameList, indexFE);
+        Set<String> FEStudents = new HashSet<String>(findIDs(newNameList, indexFE));
         System.out.println("\nThe name(s) of students who FE'd some course is " + FEStudents + ".");
 
         //Find the number of courses [name] has.
@@ -133,15 +137,15 @@ public class Main {
             System.out.println("\n" + searchName + " does not appear to be taking any courses.");
         }
 
-        
+
 
     }
 
     private static Map<String, Integer> elemCountString(ArrayList<String> userList) {
         Map<String,Integer> returnMap = new HashMap<>();
-        for (int i = 0; i < userList.size(); i++) {
-            Integer count = returnMap.get(userList.get(i));
-            returnMap.put(userList.get(i), (count == null) ? 1 : count +1);
+        for (String anUserList : userList) {
+            Integer count = returnMap.get(anUserList);
+            returnMap.put(anUserList, (count == null) ? 1 : count + 1);
         }
         return returnMap;
     }
