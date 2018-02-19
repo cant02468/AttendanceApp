@@ -107,7 +107,7 @@ public class Main {
         ArrayList<String> newNameList = randomNames(nameList, absentList.size());
         System.out.println("\nThe random list of names that is the same size as the absences list is " + newNameList + ".");
 
-        //Determine if all  5 names used at least once.
+        //Determine if all 5 names used at least once.
         boolean nameUsageCheck = ArrayInArray(nameList, newNameList);
         if (nameUsageCheck) {
             System.out.println("All 5 names have been used at least once.");
@@ -124,21 +124,45 @@ public class Main {
         }
 
         //Output the names of the students who have FE'd some course.
-        Set<String> FEStudents = new HashSet<String>(findIDs(newNameList, indexFE));
+        Set<String> FEStudents = new HashSet<String>(findIDs(newNameList, FEFinder(absentList, meetings)));
         System.out.println("\nThe name(s) of students who FE'd some course is " + FEStudents + ".");
 
         //Find the number of courses [name] has.
-        System.out.println("What is the name of the student you want to know the number of courses the student has?");
-        String searchName = stringInput();
-        Map <String, Integer> studentCourses = elemCountString(newNameList);
-        if (studentCourses.containsKey(searchName)) {
-            System.out.println("\n" + searchName + " has " + studentCourses.get(searchName) + " courses.");
+        System.out.println("\nWhat is the name of the student you want to know the number of courses the student has?");
+        String searchName1 = stringInput();
+        Map <String, Integer> studentNumCourses = elemCountString(newNameList);
+        if (studentNumCourses.containsKey(searchName1)) {
+            System.out.println(searchName1 + " has " + studentNumCourses.get(searchName1) + " course(s).");
         } else {
-            System.out.println("\n" + searchName + " does not appear to be taking any courses.");
+            System.out.println(searchName1 + " does not appear to be taking any courses.");
         }
 
+        //Output the ID of courses [name] FE'd.
+        System.out.println("\nWhat is the name of the student whose FE'd course IDs are to be found?");
+        String searchName2 = stringInput();
+        ArrayList<Integer> studentCourseFE = studentFECourses(FEFinder(absentList, meetings), studentCourses(newNameList, searchName2));
+        System.out.println(searchName2 + " FE'd courses with the following IDs: " + studentCourseFE);
 
+    }
 
+    private static ArrayList<Integer> studentFECourses(ArrayList<Integer> courseFEList, ArrayList<Integer> studentFECourses) {
+        ArrayList<Integer> returnArray = new ArrayList<>();
+        for (int courseID: courseFEList) {
+            if (studentFECourses.contains(courseID)){
+                returnArray.add(courseID);
+            }
+        }
+        return returnArray;
+    }
+
+    private static ArrayList<Integer> studentCourses (ArrayList<String> nameList, String name) {
+        ArrayList<Integer> returnArray = new ArrayList<>();
+        for (int i = 0; i < nameList.size(); i++) {
+            if (nameList.get(i).equals(name)) {
+                returnArray.add(i);
+            }
+        }
+        return returnArray;
     }
 
     private static Map<String, Integer> elemCountString(ArrayList<String> userList) {
@@ -342,7 +366,6 @@ public class Main {
 
     private static ArrayList<Integer> FEFinder(ArrayList<Integer> absentList, Integer meetings) {
         ArrayList<Integer> indexes = new ArrayList<>();
-
         for (int i = 0; i < absentList.size(); i++) {
             if (absentList.get(i) > meetings * 2){
                 indexes.add(i);
@@ -353,7 +376,6 @@ public class Main {
 
     private static ArrayList<Integer> absencesFinder(ArrayList<Integer> absentList, Integer numAbsences) {
         ArrayList<Integer> indexes = new ArrayList<>();
-
         for (int i = 0; i < absentList.size(); i++) {
             if (absentList.get(i).equals(numAbsences)){
                 indexes.add(i);
