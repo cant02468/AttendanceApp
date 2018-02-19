@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Main {
@@ -145,7 +146,14 @@ public class Main {
 
         //Generate today's date and output it.
         LocalDate today = LocalDate.now();
-        System.out.println("Today's date is " + today);
+        System.out.println("\nToday's date is " + today);
+
+        //Determine the number of days [user] has been alive.
+        System.out.println("What was the date of your birth? Please format as yyyy-mm-dd, including dashes.");
+        LocalDate birthDate = LocalDate.parse(stringInput());
+        long daysAlive = ChronoUnit.DAYS.between(birthDate, today);
+        System.out.println("You have been alive for " + daysAlive + " days.");
+        //System.out.println(birthDate.equals(today.minusDays(daysAlive)));
 
     }
 
