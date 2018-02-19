@@ -184,19 +184,11 @@ public class Main {
     }
 
     private static boolean ArrayInArray(ArrayList<String> shortUserList, ArrayList<String> largeUserList) {
-        int count = 0;
-        Set<String> shortSet = new HashSet<>(shortUserList);
-        ArrayList<String> shortList = new ArrayList<>(shortSet);
-        Set<String> longSet = new HashSet<>(largeUserList);
-        ArrayList<String> longList = new ArrayList<>(longSet);
-        for (int i = 0; i < shortUserList.size(); i++) {
-            if (longList.get(i).equals(shortList.get(i))){
-                count++;
-            } else {
-                return false;
-            }
+        if (largeUserList.containsAll(shortUserList)){
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 
     private static ArrayList<String> randomNames(ArrayList<String> userList, int size) {
