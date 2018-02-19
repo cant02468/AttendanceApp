@@ -143,6 +143,10 @@ public class Main {
         ArrayList<Integer> studentCourseFE = studentFECourses(FEFinder(absentList, meetings), studentCourses(newNameList, searchName2));
         System.out.println(searchName2 + " FE'd courses with the following IDs: " + studentCourseFE);
 
+        //Generate today's date and output it.
+        LocalDate today = LocalDate.now();
+        System.out.println("Today's date is " + today);
+
     }
 
     private static ArrayList<Integer> studentFECourses(ArrayList<Integer> courseFEList, ArrayList<Integer> studentFECourses) {
