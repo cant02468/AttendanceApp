@@ -179,8 +179,22 @@ public class Main {
             System.out.println("No students were absent on that date.");
         }
 
+        //Output the indexes of the students who have the same absence date.
+        Map<LocalDate, ArrayList<Integer>> indexStudentsSharedAbsences = indexesWithSharedDates(studentDateList);
+        System.out.println("\nThe indexes of the students who have the same absence date are " + indexStudentsSharedAbsences);
 
+    }
 
+    private static Map<LocalDate, ArrayList<Integer>> indexesWithSharedDates(ArrayList<LocalDate> datesList) {
+        Map<LocalDate, ArrayList<Integer>> sharedDatesIndexes = new HashMap<>();
+        for (LocalDate date: datesList) {
+            ArrayList<Integer> dateIndexes = findIndexesOfSpecificDate(datesList, date);
+            if (dateIndexes.size() == 1) {
+                continue;
+            }
+            sharedDatesIndexes.putIfAbsent(date, dateIndexes);
+        }
+        return sharedDatesIndexes;
     }
 
     private static ArrayList<Integer> findIndexesOfSpecificDate (ArrayList<LocalDate> datesList, LocalDate comparableDate) {
