@@ -14,9 +14,8 @@ public class Main {
 
         //Create and output list of absences.
         ArrayList<Integer> absentList = new ArrayList<>();
-        Random rand = new Random();
         for (int i = 0; i < name.length(); i++) {
-            absentList.add(rand.nextInt(11));
+            absentList.add(randomGenerator(11));
         }
         System.out.println("The elements are: " + absentList);
 
@@ -125,7 +124,7 @@ public class Main {
         }
 
         //Output the names of the students who have FE'd some course.
-        Set<String> FEStudents = new HashSet<String>(findIDs(newNameList, FEFinder(absentList, meetings)));
+        Set<String> FEStudents = new HashSet<>(findIDs(newNameList, FEFinder(absentList, meetings)));
         System.out.println("\nThe name(s) of students who FE'd some course is " + FEStudents + ".");
 
         //Find the number of courses [name] has.
@@ -154,8 +153,13 @@ public class Main {
         long daysAlive = differenceInDays(birthDate, today);
         System.out.println("You have been alive for " + daysAlive + " days."); /* System.out.println(birthDate.equals(today.minusDays(daysAlive))) == true*/
 
-        
 
+
+    }
+
+    private static Integer randomGenerator(int bound){
+        Random rand = new Random();
+        return rand.nextInt(bound);
     }
 
     private static long differenceInDays(LocalDate earlyDate, LocalDate laterDate){
@@ -210,9 +214,8 @@ public class Main {
 
     private static ArrayList<String> randomNames(ArrayList<String> userList, int size) {
         ArrayList<String> returnList = new ArrayList<>();
-        Random rand = new Random();
         for (int i = 0; i < size; i++) {
-            returnList.add(userList.get(rand.nextInt(userList.size())));
+            returnList.add(userList.get(randomGenerator(userList.size())));
         }
         return returnList;
     }
@@ -244,9 +247,8 @@ public class Main {
     }
 
     private static ArrayList<String> shuffleStringList (ArrayList<String> userList) {
-        Random rand = new Random();
         for (int i = 0; i < userList.size(); i++) {
-            int newID = rand.nextInt(userList.size());
+            int newID = randomGenerator(userList.size());
             String temp = userList.get(i);
             userList.set(i, userList.get(newID));
             userList.set(newID, temp);
@@ -255,9 +257,8 @@ public class Main {
     }
 
     private static ArrayList<Integer> shuffleIntegerList(ArrayList<Integer> userList) {
-        Random rand = new Random();
         for (int i = 0; i < userList.size(); i++) {
-            int newID = rand.nextInt(userList.size());
+            int newID = randomGenerator(userList.size());
             int temp = userList.get(i);
             userList.set(i, userList.get(newID));
             userList.set(newID, temp);
