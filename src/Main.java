@@ -183,6 +183,8 @@ public class Main {
         Map<LocalDate, ArrayList<Integer>> indexStudentsSharedAbsences = indexesWithSharedDates(studentDateList);
         System.out.println("\nThe indexes of the students who have the same absence date are " + indexStudentsSharedAbsences);
 
+        //Hooray! You know how to use parallel arrays.
+
     }
 
     private static Map<LocalDate, ArrayList<Integer>> indexesWithSharedDates(ArrayList<LocalDate> datesList) {
