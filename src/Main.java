@@ -161,7 +161,39 @@ public class Main {
         Set<String> studentsMinimumAbsences = findUniqueElementsFromIDs(newNameList, findIDsOfSpecificElem(absentList, minInArray(absentList)));
         System.out.println("\nThe name(s) of the student(s) with the fewest absences is " + studentsMinimumAbsences);
 
+        //Output the names of students who have the longest number of days since an absence.
+        String studentLongestWithoutAbsence = newNameList.get(indexOfEarliestLocalDate(studentDateList));
+        System.out.println("\nThe name of the student who have the longest number of days since an absence is " + studentLongestWithoutAbsence + ".");
+
+
     }
+
+
+
+    private static int indexOfLatestLocalDate (ArrayList<LocalDate> localDatesList) {
+        int dateIndex = 0;
+        LocalDate latestDate = localDatesList.get(0);
+        for (int i = 0; i < localDatesList.size(); i++) {
+            if (latestDate.isBefore(localDatesList.get(i))) {
+                latestDate = localDatesList.get(i);
+                dateIndex = i;
+            }
+        }
+        return dateIndex;
+    }
+
+    private static int indexOfEarliestLocalDate (ArrayList<LocalDate> localDatesList) {
+        int dateIndex = 0;
+        LocalDate earliestDate = localDatesList.get(0);
+        for (int i = 0; i < localDatesList.size(); i++) {
+            if (earliestDate.isAfter(localDatesList.get(i))) {
+                earliestDate = localDatesList.get(i);
+                dateIndex = i;
+            }
+        }
+        return dateIndex;
+    }
+
     private static Set<String> findUniqueElementsFromIDs (ArrayList<String> listOfStrings, ArrayList<Integer> listOfIndexes) {
         Set<String> listOfElements = new HashSet<>();
         for (int index: listOfIndexes) {
