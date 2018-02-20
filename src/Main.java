@@ -162,15 +162,18 @@ public class Main {
         System.out.println("\nThe name(s) of the student(s) with the fewest absences is " + studentsMinimumAbsences);
 
         //Output the names of students who have the longest number of days since an absence.
-        String studentLongestWithoutAbsence = newNameList.get(indexOfEarliestLocalDate(studentDateList));
+        String studentLongestWithoutAbsence = newNameList.get(indexEarliestDate(studentDateList));
         System.out.println("\nThe name of the student who have the longest number of days since an absence is " + studentLongestWithoutAbsence + ".");
 
+        //Output the range of absence dates.
+        long absencesDateRange = differenceInDays(studentDateList.get(indexEarliestDate(studentDateList)), studentDateList.get(indexLatestDate(studentDateList)));
+        System.out.println("The range of absence dates is " + absencesDateRange + " days.");
 
     }
 
 
 
-    private static int indexOfLatestLocalDate (ArrayList<LocalDate> localDatesList) {
+    private static int indexLatestDate (ArrayList<LocalDate> localDatesList) {
         int dateIndex = 0;
         LocalDate latestDate = localDatesList.get(0);
         for (int i = 0; i < localDatesList.size(); i++) {
@@ -182,7 +185,7 @@ public class Main {
         return dateIndex;
     }
 
-    private static int indexOfEarliestLocalDate (ArrayList<LocalDate> localDatesList) {
+    private static int indexEarliestDate(ArrayList<LocalDate> localDatesList) {
         int dateIndex = 0;
         LocalDate earliestDate = localDatesList.get(0);
         for (int i = 0; i < localDatesList.size(); i++) {
