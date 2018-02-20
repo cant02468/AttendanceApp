@@ -166,12 +166,14 @@ public class Main {
         System.out.println("\nThe name of the student who have the longest number of days since an absence is " + studentLongestWithoutAbsence + ".");
 
         //Output the range of absence dates.
-        long absencesDateRange = differenceInDays(studentDateList.get(indexEarliestDate(studentDateList)), studentDateList.get(indexLatestDate(studentDateList)));
+        long absencesDateRange = rangeInDateList(studentDateList);
         System.out.println("The range of absence dates is " + absencesDateRange + " days.");
 
     }
-
-
+    
+    private static long rangeInDateList (ArrayList<LocalDate> listOfDates) {
+        return differenceInDays(listOfDates.get(indexEarliestDate(listOfDates)), listOfDates.get(indexLatestDate(listOfDates)));
+    }
 
     private static int indexLatestDate (ArrayList<LocalDate> localDatesList) {
         int dateIndex = 0;
