@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -153,8 +152,62 @@ public class Main {
         long daysAlive = differenceInDays(birthDate, today);
         System.out.println("You have been alive for " + daysAlive + " days."); /* System.out.println(birthDate.equals(today.minusDays(daysAlive))) == true*/
 
+        //Create a list of LocalDate objects.
+        ArrayList<LocalDate> studentDateList = addDatesToList(newNameList.size()-2, 21);
+        studentDateList.add(birthDate);
+        System.out.println("The list of Local Date objects is " + studentDateList);
 
+        //Output the names of the students with the fewest absences.
+        Set<String> studentsMinimumAbsences = findUniqueElementsFromIDs(newNameList, findIDsOfSpecificElem(absentList, minInArray(absentList)));
+        System.out.println("\nThe name(s) of the student(s) with the fewest absences is " + studentsMinimumAbsences);
 
+    }
+    private static Set<String> findUniqueElementsFromIDs (ArrayList<String> listOfStrings, ArrayList<Integer> listOfIndexes) {
+        Set<String> listOfElements = new HashSet<>();
+        for (int index: listOfIndexes) {
+            listOfElements.add(listOfStrings.get(index));
+        }
+        return listOfElements;
+    }
+
+    private static ArrayList<Integer> findIDsOfSpecificElem (ArrayList<Integer> listOfIntegers, int comparableValue){
+        ArrayList<Integer> elementIDs = new ArrayList<>();
+        for (int i = 0; i < listOfIntegers.size(); i++) {
+            if (listOfIntegers.get(i) == comparableValue) {
+                elementIDs.add(i);
+            }
+        }
+        return elementIDs;
+    }
+
+    private static int maxInArray(ArrayList<Integer> userList) {
+        int max =  userList.get(0);
+        for (int element: userList) {
+            if (element > max) {
+                max = element;
+            }
+        }
+        return max;
+    }
+
+    private static int minInArray(ArrayList<Integer> userList) {
+        int min =  userList.get(0);
+        for (int element: userList) {
+            if (element < min) {
+                min = element;
+            }
+        }
+        return min;
+    }
+
+    private static ArrayList<LocalDate> addDatesToList(int size, int numberOfDaysFromToday) {
+        ArrayList<LocalDate> localDateArrayList = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        localDateArrayList.add(today);
+        for (int i = 0; i < size; i++) {
+            localDateArrayList.add(today.minusDays(randomGenerator(numberOfDaysFromToday)));
+        }
+        return localDateArrayList;
     }
 
     private static Integer randomGenerator(int bound){
