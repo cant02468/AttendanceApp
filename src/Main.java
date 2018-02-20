@@ -169,8 +169,30 @@ public class Main {
         long absencesDateRange = rangeInDateList(studentDateList);
         System.out.println("The range of absence dates is " + absencesDateRange + " days.");
 
+        //Find the indexes of the students who have [X] absence date.
+        System.out.println("\nWhat is the date in which a student could be absent? Please format as yyyy-mm-dd, including dashes.");
+        LocalDate studentSpecificDate = LocalDate.parse(stringInput());
+        ArrayList<Integer> studentsSpecificAbsence = findIndexesOfSpecificDate(studentDateList, studentSpecificDate);
+        if (!studentsSpecificAbsence.isEmpty()) {
+            System.out.println("The indexes of the students were absent on " + studentSpecificDate + " is " + studentsSpecificAbsence);
+        } else {
+            System.out.println("No students were absent on that date.");
+        }
+
+
+
     }
-    
+
+    private static ArrayList<Integer> findIndexesOfSpecificDate (ArrayList<LocalDate> datesList, LocalDate comparableDate) {
+        ArrayList<Integer> elementIDs = new ArrayList<>();
+        for (int i = 0; i < datesList.size(); i++) {
+            if (datesList.get(i).equals(comparableDate)) {
+                elementIDs.add(i);
+            }
+        }
+        return elementIDs;
+    }
+
     private static long rangeInDateList (ArrayList<LocalDate> listOfDates) {
         return differenceInDays(listOfDates.get(indexEarliestDate(listOfDates)), listOfDates.get(indexLatestDate(listOfDates)));
     }
